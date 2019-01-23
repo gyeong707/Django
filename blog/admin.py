@@ -13,10 +13,10 @@ class PostAdmin(admin.ModelAdmin):
     actions = ['make_published', 'make_Draft']
 
     def content_size(self, post): #인자로 인스턴스
-        return '{}글자' .format(len(post.content))
-        # return mark_safe('<strong>{}</strong>글자' .format(len(post.content))
+        # return '{}글자' .format(len(post.content))
+        return mark_safe('<strong>{}</strong>글자' .format(len(post.content)))
 
-    content_size.short_description = "글자수"
+    content_size.short_description = '글자수'
 
     def make_published(self, request, queryset):
         updated_count = queryset.update(status='p')
