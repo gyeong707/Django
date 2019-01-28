@@ -3,6 +3,7 @@ import re
 from django.forms import ValidationError
 from django.utils import timezone
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 
@@ -17,7 +18,9 @@ class Post(models.Model):
         ('p', 'Published'),
         ('w', 'Withdrawn'),
     )
-    author = models.CharField(max_length=100)
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete='CASCADE')
+    # author = models.CharField(max_length=100)
     title = models.CharField(max_length=100, verbose_name = "제목", 
     help_text = "포스팅 제목을 입력해주세요."
         # choices = (
