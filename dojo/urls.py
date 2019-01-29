@@ -2,6 +2,7 @@ from django.urls import path, re_path, include
 from . import views
 from . import views_cbv
 
+app_name = 'dojo'
 
 urlpatterns = [
     # path('sum/<int:x>', views.mysum),
