@@ -17,12 +17,14 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from django.conf import settings
 from django.shortcuts import redirect
+from django.views.defaults import page_not_found
 
 # def root(request):
 #     return redirect('blog:post_list')
 
 
 urlpatterns = [
+    path('404/', page_not_found, {'exception': Exception()}),
     path('', lambda r: redirect('blog:post_list'), name='root'),
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls', namespace="blog")),
