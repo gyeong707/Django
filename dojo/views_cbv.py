@@ -56,11 +56,9 @@ class ExcelDownloadView(View):
 
     def get(self, request):
         filename = os.path.basename(self.excel_path)
-        with open(elf.excel_path, 'rb') as f:
+        with open(self.excel_path, 'rb') as f:
                 response = HttpResponse(f, content_type = 'application/vnd.ms-excel')
                 # 필요한 응답헤더 세팅
                 response['Content-Disposition'] = 'attachment; filename="{}"' .format(filename)
                 return response
 
-
-#맨 마지막 안돌아감 왠지 모르겠음 

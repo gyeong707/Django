@@ -5,11 +5,13 @@ from . import views_cbv
 app_name = 'dojo'
 
 urlpatterns = [
+    
+    path('new/', views.post_new),
+
     # path('sum/<int:x>', views.mysum),
     # path('sum/<int:x>/<int:y>', views.mysum),
     # path('sum/<int:x>/<int:y>/<int:z>', views.mysum),
     re_path(r'^sum/(?P<numbers>[\d/]+)/$', views.mysum),
-    #이거 그냥 path로는 어떻게 쓰지? Converter 이용하는건가??
 
     re_path(r'^hello/(?P<name>[ㄱ-힣]+)/(?P<age>\d+)$', views.hello),
     path('list1/', views.post_list1),

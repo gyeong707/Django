@@ -1,8 +1,41 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 import os
+from .forms import PostForm
+from .models import Post
 
-# Create your views here.
+
+def post_new(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            # 방법(1)
+            # post = Post()
+            # post.title = form.cleaned_data['title']
+            # post.content = form.cleaned_data['content']
+            # post.save()
+
+            # 방법(2)
+            # post = Post(title=form.cleaned_data['title'],
+            #             content = form.cleaned_data['content'])
+            # post.save()
+
+            # 방법(3)
+            # post = Post.objects.create(title=form.cleaned_data['title'],
+            #                             content=form.cleaned_data['content'])
+
+            # 방법(4)
+            post = Post.objects.create(**form.cleaned_data)
+            
+            print(form.cleaned_data)
+            return redirect('/dojo/') #url reverse를 쓰는 경우 해당 이름의 네임스페이스를 써야 함.
+    else:
+        form = PostForm()
+    return render(request, 'dojo/post_form.html', {
+        'form': form
+    })
+
+
 def mysum(request, numbers):
     #request: HttpRequest
     result = sum(map(int, numbers.split("/")))
@@ -45,3 +78,4 @@ def excel_download(request):
         #기본이 text/html임. 근데 우리는 excel 형식이니까 application~으로 지정해주어야 하는 것.
         response['Content-Disposition'] = 'attachment; filename="{}"' .format(filename)
         return response
+
