@@ -9,24 +9,9 @@ def post_new(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            # 방법(1)
-            # post = Post()
-            # post.title = form.cleaned_data['title']
-            # post.content = form.cleaned_data['content']
-            # post.save()
-
-            # 방법(2)
-            # post = Post(title=form.cleaned_data['title'],
-            #             content = form.cleaned_data['content'])
-            # post.save()
-
-            # 방법(3)
-            # post = Post.objects.create(title=form.cleaned_data['title'],
-            #                             content=form.cleaned_data['content'])
-
-            # 방법(4)
-            post = Post.objects.create(**form.cleaned_data)
-            
+            post = form.save(commit=False)
+            post.ip = request.META['REMOTE_ADDR']
+            post.save()
             print(form.cleaned_data)
             return redirect('/dojo/') #url reverse를 쓰는 경우 해당 이름의 네임스페이스를 써야 함.
     else:
@@ -78,4 +63,22 @@ def excel_download(request):
         #기본이 text/html임. 근데 우리는 excel 형식이니까 application~으로 지정해주어야 하는 것.
         response['Content-Disposition'] = 'attachment; filename="{}"' .format(filename)
         return response
+
+
+
+####post_new에서 객체 저장하는 방법 -- 최종적으로는 방법(4)를 사용함 ####
+ # 방법(1)
+    # post = Post()
+    # post.title = form.cleaned_data['title']
+    # post.content = form.cleaned_data['content']
+    # post.save()
+
+# 방법(2)
+    # post = Post(title=form.cleaned_data['title'],
+    #             content = form.cleaned_data['content'])
+    # post.save()
+
+ # 방법(3)
+    # post = Post.objects.create(title=form.cleaned_data['title'],
+    #                             content=form.cleaned_data['content'])
 
