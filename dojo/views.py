@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponse
 import os
 from .forms import PostForm
@@ -19,6 +19,24 @@ def post_new(request):
     return render(request, 'dojo/post_form.html', {
         'form': form
     })
+
+
+def post_edit(request, id):
+    post = get_object_or_404(Post, id=id)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post )
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.ip = request.META['REMOTE_ADDR']
+            post.save()
+            return redirect('/dojo/') #url reverse를 쓰는 경우 해당 이름의 네임스페이스를 써야 함.
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'dojo/post_form.html', {
+        'form': form,
+    })
+
 
 
 def mysum(request, numbers):
