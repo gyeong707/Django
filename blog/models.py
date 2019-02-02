@@ -32,7 +32,9 @@ class Post(models.Model):
     
         # )
     )
-    content = models.TextField(verbose_name = "내용", help_text="내용을 입력해주세요")            # 길이 제한이 없는 문자열 : Textfield 
+    content = models.TextField(verbose_name = "내용", help_text="내용을 입력해주세요")            # 길이 제한이 없는 문자열 : Textfield
+    photo = models.ImageField(blank=True)
+    
     tags = models.CharField(max_length=100, blank=True)
     lnglat = models.CharField(max_length=50, blank=True, help_text='경도, 위도 포맷으로 입력',
     validators = [lnglat_validator],) #함수 자체를 인자로 넘김,

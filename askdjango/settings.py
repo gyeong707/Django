@@ -141,3 +141,7 @@ MESSAGE_LEVEL = constants.DEBUG
 #디버그 레벨의 메시지는 잘 안남기지만 남겨야 하는 상황에서는 이렇게 지정해주어야 함.
 
 MESSAGE_TAGS = {constants.ERROR: 'danger'}
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
