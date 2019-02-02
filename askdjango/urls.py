@@ -18,7 +18,7 @@ from django.urls import path, re_path, include
 from django.conf import settings
 from django.shortcuts import redirect
 from django.views.defaults import page_not_found
-
+from django.conf.urls.static import static
 # def root(request):
 #     return redirect('blog:post_list')
 
@@ -33,6 +33,7 @@ urlpatterns = [
     path('shop/', include('shop.urls', namespace='shop')),
 ]
 
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar
