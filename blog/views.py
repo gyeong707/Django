@@ -11,6 +11,9 @@ def post_list(request):
     q = request.GET.get('q', '')
     if q:
             qs = qs.filter(title__icontains=q)
+
+   # messages.error(request, '에러메시지 테스트')
+
     return render(request, 'blog/post_list.html', {
         'post_list' : qs,
         'q': q,
@@ -49,7 +52,7 @@ def post_edit(request, id):
                 form = PostForm(request.POST, request.FILES, instance=post)
                 if form.is_valid():
                         post = form.save()
-                        messages.success(request,'성공적으로 수정하였습니다.')
+                        messages.success(request,'성공적으로 수정하였습니다')
                         return redirect(post)
         else:
                 form = PostForm(instance=post)

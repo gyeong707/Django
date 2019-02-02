@@ -130,3 +130,11 @@ USE_TZ = True
 STATIC_ROOT = 'static'
 
 STATIC_URL = '/static/'
+
+
+from django.contrib.messages import constants
+
+MESSAGE_LEVEL = constants.DEBUG
+#디버그 레벨의 메시지는 잘 안남기지만 남겨야 하는 상황에서는 이렇게 지정해주어야 함.
+
+MESSAGE_TAGS = {constants.ERROR: 'danger'}
