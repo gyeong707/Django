@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
-from imagekit.models import ImageSpecField
+from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import Thumbnail
 
 
@@ -37,11 +37,16 @@ class Post(models.Model):
     )
     content = models.TextField(verbose_name = "내용", help_text="내용을 입력해주세요")            # 길이 제한이 없는 문자열 : Textfield
 
-    photo = models.ImageField(blank=True, upload_to='blog/post/%Y/%m')
-    photo_thumbnail = ImageSpecField(source='photo',
-                processors=[Thumbnail(300, 300)],
-                format = 'JPEG',
-                options={'quality': 50})
+    # photo = models.ImageField(blank=True, upload_to='blog/post/%Y/%m')
+    # photo_thumbnail = ImageSpecField(source='photo',
+    #             processors=[Thumbnail(300, 300)],
+    #             format = 'JPEG',
+    #             options={'quality': 50})
+
+    photo = ProcessedImageField(blank=True, upload_to='blog/post/%Y/%m',
+            processors = [Thumbnail(300, 300)], 
+            format = "JPEG",
+            options = {'quality': 60})
 
 
     tags = models.CharField(max_length=100, blank=True)
