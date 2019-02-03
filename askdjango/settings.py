@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'accounts',
     'shop',
-    'bootstrap3'
+    'bootstrap3',
+    'imagekit',
 ]
 
 MIDDLEWARE = [
