@@ -1,6 +1,6 @@
 from .models import Post
 from django import forms
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 
 
 class PostForm(forms.ModelForm):
@@ -16,3 +16,4 @@ class PostCreateView(CreateView):
 
 post_new = PostCreateView.as_view()
 post_list = ListView.as_view(model=Post, paginate_by=10)
+post_detail = DetailView.as_view(model=Post)
