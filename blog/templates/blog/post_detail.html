@@ -1,5 +1,5 @@
 {% extends 'blog/layout.html' %}
-
+{% load imagekit %}
 
 {% block title %}
     {{ post.title }}
@@ -15,7 +15,17 @@
                 <hr>
                 {% if post.photo %}
                     <img src="{{ post.photo.url }}" style="max-width: 100%;">
+
+                    {% thumbnail "100x100" post.photo %}
+
+                    {% thumbnail "100x100" post.photo as thumb %}
+                    <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}">
+
+                    {% thumbnail "100x100" post.photo -- style="" onclick="" class="" %}
+
                 {% endif %}
+                <!-- # 파일이 업로드 되었을 때만 실행 -->
+
 
                 <p> {{  post.content|linebreaks  }} </p>
             

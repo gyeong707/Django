@@ -8,6 +8,7 @@ urlpatterns = [
     
     path('new/', views.post_new),
     path('<int:id>/edit/', views.post_edit),
+    path('<int:id>/', views.post_detail),
 
     # path('sum/<int:x>', views.mysum),
     # path('sum/<int:x>/<int:y>', views.mysum),
