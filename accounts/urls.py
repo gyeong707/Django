@@ -2,7 +2,6 @@ from django.urls import path, re_path, include
 from . import views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
-from .forms import LoginForm
 
 urlpatterns = [
     path('profile/', views.profile, name='profile'),

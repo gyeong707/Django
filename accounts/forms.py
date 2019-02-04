@@ -1,7 +1,5 @@
-from django import forms
-from .models import Profile
+from django.contrib.auth.forms import UserCreationForm
 
-class LoginForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = '__all__'
+class SignupForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        fields = UserCreationForm.Meta.fields + ('email',)
