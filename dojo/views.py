@@ -6,7 +6,7 @@ from .models import Post
 from django.views.generic import DetailView
 
 
-post_detail = DetailView.as_view(model=Post, pk_url_kwarg='id')
+post_detail = DetailView.as_view(model=Post)
 
 
 
