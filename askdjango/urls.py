@@ -29,8 +29,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls', namespace="blog")),
     path('dojo/', include('dojo.urls', namespace="dojo")),
-    path('accounts/', include('accounts.urls', namespace='accounts')),
-    path('shop/', include('shop.urls', namespace='shop')),
+    path('accounts/', include('accounts.urls')),
+    path('shop/', include('shop.urls', namespace='shops')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
